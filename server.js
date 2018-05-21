@@ -35,7 +35,7 @@ function send_message(string, remote_address, remote_port) {
 
 server.on('listening', function () {
     var address = server.address();
-    console.log(address);
+    console.log("Address: " + address);
     console.log('Hey, listen!');
 });
 
