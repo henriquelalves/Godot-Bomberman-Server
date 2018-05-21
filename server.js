@@ -3,6 +3,9 @@ const dgram = require('dgram');
 const PORT = 3456;
 const HOST = '0.0.0.0';
 
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
 var server = dgram.createSocket('udp4');
 
 var player_ids = {};
@@ -35,7 +38,7 @@ function send_message(string, remote_address, remote_port) {
 
 server.on('listening', function () {
     var address = server.address();
-    console.log("Address: " + address);
+    console.log( "Listening on " + server_ip_address + ", port " + server_port )
     console.log('Hey, listen!');
 });
 
@@ -74,4 +77,4 @@ server.on('message', function (message, remote) {
     }
 });
 
-server.bind(PORT, HOST);
+server.bind(server_port, server_ip_address);
